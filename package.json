@@ -1,0 +1,26 @@
+{
+  "name": "portfolio-backend",
+  "version": "1.0.0",
+  "description": "API for my porfolio website",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npm run prod",
+    "prod": "cross-env NODE-ENV=production babel-node -- ./src/index.js",
+    "dev": "cross-env NODE-ENV=development nodemon --exec babel-node src/index.js"
+  },
+  "author": "Kamolu Nehemiah",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemailer": "^6.4.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
