@@ -1,14 +1,17 @@
 import nodemailer from 'nodemailer';
+import sgMail from '@sendgrid/mail';
 import dotenv from 'dotenv';
 dotenv.config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
-const sendMail = async (from,subject,message)=> {
+
+const sendMailWithNodeMailer = async (from,subject,message)=> {
 
     return new Promise((resolve, reject) => {
 
       const transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
+        service:'gmail',
         port: process.env.EMAIL_PORT,
         secure: true,
         auth: {
@@ -40,4 +43,21 @@ const sendMail = async (from,subject,message)=> {
   };
 
 
-export default sendMail;
+const sendMailWithSendGrid  = async (from,subject,message) =>{
+
+  const msg = {
+    to: process.env.EMAIL_TO,
+    from: process.env.EMAIL_FROM,
+    subject,
+    html: `<p>${message}</p> <br> <p>Email sent from ${from} </p>`,
+  }
+  
+  try{
+    await sgMail.send(msg);
+  }catch(e){
+    console.log("SNED GRID ERROR", e)
+    throw new Error(e,404);
+  }
+};
+
+export  {sendMailWithNodeMailer,sendMailWithSendGrid};

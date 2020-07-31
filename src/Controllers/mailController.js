@@ -1,4 +1,4 @@
-import sendMail from './../Mailing/mailer';
+import {sendMailWithNodeMailer} from './../Mailing/mailer';
 
 const contactUs = async (req,res,next)=>{
 
@@ -14,7 +14,7 @@ const contactUs = async (req,res,next)=>{
 
         const { from, subject, message} = req.body;
 
-        await sendMail(from,subject,message);
+        await sendMailWithNodeMailer(from,subject,message);
 
         return  res.status(200).json({ "message":"Email sent"});
 
