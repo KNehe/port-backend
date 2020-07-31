@@ -10,6 +10,7 @@ const sendMail = async (from,subject,message)=> {
       const transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.EMAIL_PORT,
+        secure: true,
         auth: {
           user: process.env.EMAIL_AUTH_USERNAME,
           pass: process.env.EMAIL_AUTH_PASSWORD,
@@ -33,6 +34,7 @@ const sendMail = async (from,subject,message)=> {
         });
       
     }).catch(function(error) {
+      console.log("NODE MAILER ERROR", error);
       throw new Error(error);
     });
   };
